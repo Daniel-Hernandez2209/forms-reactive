@@ -14,11 +14,12 @@
             placeholder="Nombre del producto"
             formControlName="name"
           />
-
-          <span class="form-text text-danger">
-            <!-- Debe de ser de 3 letras -->
-            error message
-          </span>
+          @if (isValitedField('name')) {
+            <span class="form-text text-danger">
+              <!-- Debe de ser de 3 letras -->
+              {{ getFieldError('name') }}
+            </span>
+          }
         </div>
       </div>
 
@@ -32,7 +33,12 @@
             placeholder="Precio del producto"
             formControlName="price"
           />
-          <span class="form-text text-danger"> El precio debe de ser 0 o mayor </span>
+          @if (isValitedField('price')) {
+            <span class="form-text text-danger">
+              <!-- Debe de ser de 3 letras -->
+              {{ getFieldError('price') }}
+            </span>
+          }
         </div>
       </div>
 
@@ -47,7 +53,12 @@
             formControlName="inStorage"
           />
 
-          <span class="form-text text-danger"> Las existencias deben de ser 0 o mayor </span>
+          @if (isValitedField('inStorage')) {
+            <span class="form-text text-danger">
+              <!-- Debe de ser de 3 letras -->
+              {{ getFieldError('inStorage') }}
+            </span>
+          }
         </div>
       </div>
 
@@ -75,7 +86,7 @@
     <pre>{{ myForm.value | json }}</pre>
 
     <span>Precio</span>
-    <pre>{{ myForm.controls.price.value | json }}</pre>
+    <pre>{{ myForm.controls['price'].value | json }}</pre>
 
     <span>erorres</span>
     <pre>{{ myForm.controls['name'].errors | json }}</pre>
@@ -84,6 +95,6 @@
     <pre>{{ myForm.controls['inStorage'].errors | json }}</pre>
 
     <span>Producto</span>
-    <pre>{{ myForm.controls.name.value | json }}</pre>
+    <pre>{{ myForm.controls['name'].value | json }}</pre>
   </div>
 </div>
