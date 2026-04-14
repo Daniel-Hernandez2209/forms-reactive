@@ -7,6 +7,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { formUtils } from '../../../utils/form-utils';
 
 @Component({
   selector: 'app-basic-page',
@@ -15,14 +16,13 @@ import {
 })
 export class BasicPage {
   private fb = inject(FormBuilder);
+  formUtil = formUtils;
   myForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
     price: [0, [Validators.required, Validators.min(10)]],
     inStorage: [0, [Validators.required, Validators.min(10)]],
   });
-  isValitedField(field: string): boolean | null {
-    return this.myForm.controls[field].errors && this.myForm.controls[field].touched;
-  }
+
   getFieldError(field: string): string | null {
     if (!this.myForm.controls[field]) return null;
 
