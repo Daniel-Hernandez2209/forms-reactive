@@ -1,1 +1,30 @@
-<p>side-menu works!</p>,
+<h1>paginas</h1>
+<hr />
+
+<h3 class="mt-5">reactive forms</h3>
+
+<ul class="list-group">
+  @for (item of reactiveMenu; track item.title) {
+    <li class="list-group-item" routerLinkActive="active" [routerLink]="item.route">
+      {{ item.title }}
+    </li>
+  }
+</ul>
+<h3 class="mt-5">auth</h3>
+
+<ul class="list-group">
+  @for (item of authMenu; track item.title) {
+    <li class="list-group-item" routerLinkActive="active" [routerLink]="item.route">
+      {{ item.title }}
+    </li>
+  }
+</ul>
+<h3 class="mt-5">country</h3>
+
+<ul class="list-group">
+  @for (item of countryMenu; track item.title) {
+    <li class="list-group-item" routerLinkActive="active" [routerLink]="item.route">
+      {{ item.title }}
+    </li>
+  }
+</ul>
