@@ -1,7 +1,7 @@
 <h2>Reactivos: <small> Dinámicos </small></h2>
 <hr />
 
-<form autocomplete="off" [formGroup]="myform">
+<form autocomplete="off" [formGroup]="myform" (ngSubmit)="onSubmit()">
   <!-- Nombre -->
   <div class="mb-3 row">
     <label class="col-sm-3 col-form-label">Nombre</label>
@@ -20,9 +20,17 @@
     <label class="col-sm-3 col-form-label">Agregar</label>
     <div class="col-sm-9">
       <div class="input-group">
-        <input class="form-control" placeholder="Agregar favorito" />
+        <input
+          class="form-control"
+          placeholder="Agregar favorito"
+          [formControl]="myFavorite"
+          (keydown.enter)="onAddToFavorite()"
+          (keydown.enter)="$event.preventDefault()"
+        />
 
-        <button class="btn btn-outline-primary" type="button">Agregar favorito</button>
+        <button class="btn btn-outline-primary" type="button " (click)="onAddToFavorite()">
+          Agregar favorito
+        </button>
       </div>
     </div>
   </div>
@@ -36,7 +44,9 @@
           <div class="input-group">
             <input class="form-control" [formControlName]="i" />
 
-            <button class="btn btn-outline-danger" type="button">Eliminar</button>
+            <button class="btn btn-outline-danger" type="button" (click)="ondeleteGame(i)">
+              Eliminar
+            </button>
           </div>
           @if (formUtil.isvalidateInArray(favoriteGames, i)) {
             <span class="form-text text-danger">
@@ -45,15 +55,17 @@
           }
         </div>
       }
+      @if (favoriteGames.length < 3) {
+        <span class="form-text text-danger">
+          {{ getErrorMessage.getErrorGeneral(favoriteGames) }}
+        </span>
+      }
     </div>
   </div>
 
   <div class="row">
     <div class="col-sm-12">
-      <button type="submit" class="btn btn-primary float-end">
-        <!-- [disabled]="myForm.invalid" -->
-        Guardar
-      </button>
+      <button type="submit" class="btn btn-primary float-end">Guardar</button>
     </div>
   </div>
 </form>

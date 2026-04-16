@@ -8,7 +8,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { form } from '@angular/forms/signals';
 import { formUtils } from '../../../utils/form-utils';
 import { getFieldError } from '../../../utils/errors-form-utils';
 
@@ -34,7 +33,23 @@ export class DynamicPage {
     ),
   });
 
+  myFavorite = new FormControl('', [Validators.required, Validators.minLength(3)]);
+
   get favoriteGames() {
     return this.myform.get('favoriteGame') as FormArray;
+  }
+
+  onAddToFavorite() {
+    if (this.myFavorite.invalid) return;
+    const newGame = this.myFavorite.value;
+    this.favoriteGames.push(this.fb.control(newGame, Validators.required));
+  }
+  ondeleteGame(index: number) {
+    this.favoriteGames.removeAt(index);
+  }
+
+  onSubmit() {
+    console.log(this.myform.value);
+    this.myform.markAllAsTouched();
   }
 }

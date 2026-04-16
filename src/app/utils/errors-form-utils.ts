@@ -27,4 +27,11 @@ export class getFieldError {
 
     return getFieldError.getTextError(errors);
   }
+
+  static getErrorGeneral(form: FormArray) {
+    if (form.controls.length == 0) return null;
+    const errors = form.errors || {};
+
+    return getFieldError.getTextError(errors);
+  }
 }
