@@ -1,10 +1,7 @@
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormGroup, ValidationErrors } from '@angular/forms';
 
 export class getFieldError {
-  static getErrorMessage(form: FormGroup, field: string): string | null {
-    if (!form.controls[field]) return null;
-    const errors = form.controls[field].errors || {};
-
+  static getTextError(errors: ValidationErrors) {
     for (const key of Object.keys(errors)) {
       switch (key) {
         case 'required':
@@ -16,5 +13,18 @@ export class getFieldError {
       }
     }
     return null;
+  }
+
+  static getErrorMessage(form: FormGroup, field: string): string | null {
+    if (!form.controls[field]) return null;
+    const errors = form.controls[field].errors || {};
+    return getFieldError.getTextError(errors);
+  }
+
+  static getErrorMessageInArray(formArray: FormArray, index: number): string | null {
+    if (formArray.controls.length == 0) return null;
+    const errors = formArray.controls[index].errors || {};
+
+    return getFieldError.getTextError(errors);
   }
 }

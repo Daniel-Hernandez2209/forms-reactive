@@ -1,14 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { formUtils } from '../../../utils/form-utils';
-import { form } from '@angular/forms/signals';
 import { getFieldError } from '../../../utils/errors-form-utils';
 
 @Component({
