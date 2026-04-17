@@ -49,7 +49,6 @@ export class DynamicPage {
   }
 
   onSubmit() {
-    console.log(this.myform.value);
     this.myform.markAllAsTouched();
   }
 }
