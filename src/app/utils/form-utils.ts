@@ -12,4 +12,11 @@ export class formUtils {
   static isvalidateInArray(formArray: FormArray, index: number) {
     return formArray.controls[index].invalid && formArray.controls[index].touched;
   }
+
+  static isValidatedGroup(form: FormGroup, errorName: string): boolean {
+    return (
+      !!form.errors?.[errorName] &&
+      (form.controls['confirmPassword'].touched || form.controls['password'].touched)
+    );
+  }
 }

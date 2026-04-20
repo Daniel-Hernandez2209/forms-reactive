@@ -17,7 +17,11 @@ export class RegisterPage {
   myForm: FormGroup = this.fb.group(
     {
       nameAndLastName: ['daniel', [Validators.required, Validators.pattern(formUtils.namePattern)]],
-      email: ['dna@gmail.com', [Validators.required, Validators.pattern(formUtils.emailPattern)]],
+      email: [
+        'dna@gmail.com',
+        [Validators.required, Validators.pattern(formUtils.emailPattern)],
+        [this.getErrorField.chekingServerResponse],
+      ],
       username: [
         'danielhernandez',
         [
@@ -27,7 +31,7 @@ export class RegisterPage {
         ],
       ],
       password: ['123456', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['123456S', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['123456', [Validators.required, Validators.minLength(6)]],
     },
     {
       validators: [

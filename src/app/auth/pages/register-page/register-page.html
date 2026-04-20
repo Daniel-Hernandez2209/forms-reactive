@@ -84,16 +84,19 @@
             placeholder="Confirmar la contraseña"
             formControlName="confirmPassword"
           />
-          @if (formUtils.isValitedField(myForm, 'email')) {
-            <span class="form-text text-danger">{{
-              getErrorField.isValidateFieldOneEqualsFieldTwo('password', 'confirmPassword')
-            }}</span>
+          @if (formUtils.isValitedField(myForm, 'confirmPassword')) {
+            <span class="form-text text-danger">
+              {{ getErrorField.getErrorMessage(myForm, 'confirmPassword') }}
+            </span>
           }
         </div>
       </div>
 
       <div class="row">
         <div class="col">
+          @if (myForm.errors && myForm.touched) {
+            <span class="text-danger">las contraseñas deben ser iguales</span>
+          }
           <button class="btn btn-primary float-end" type="submit">Crear</button>
         </div>
       </div>
@@ -103,9 +106,9 @@
 
 <h2>Form Valid:</h2>
 <h2>Form Status:</h2>
-<h2>Form Pending:</h2>
+<h2>Form Pending:{{ myForm.pending }}</h2>
 <h2>Form errors: {{ myForm.errors | json }}</h2>
-<pre>{{ 'formulario' | json }}</pre>
+<h2>error :{{ myForm.hasError('field1equalsfield2') | json }}</h2>
 
 <h5>Nombre</h5>
 <pre>{{ myForm.valid | json }}</pre>
@@ -121,3 +124,8 @@
 
 <h5>Confirmar</h5>
 <pre>{{ myForm.controls['confirmPassword'].errors | json }}</pre>
+
+<pre>myForm.errors: {{ myForm.errors | json }}</pre>
+<pre>confirmPassword.errors: {{ myForm.get('confirmPassword')?.errors | json }}</pre>
+<pre>confirmPassword.touched: {{ myForm.get('confirmPassword')?.touched | json }}</pre>
+<pre>password.touched: {{ myForm.get('password')?.touched | json }}</pre>
