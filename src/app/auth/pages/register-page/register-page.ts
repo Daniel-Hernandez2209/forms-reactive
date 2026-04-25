@@ -28,6 +28,7 @@ export class RegisterPage {
           Validators.required,
           Validators.minLength(6),
           Validators.pattern(formUtils.notOnlySpacesPattern),
+          this.getErrorField.noStrider,
         ],
       ],
       password: ['123456', [Validators.required, Validators.minLength(6)]],

@@ -49,9 +49,9 @@
             formControlName="username"
           />
           @if (formUtils.isValitedField(myForm, 'username')) {
-            <span class="form-text text-danger"
-              >el nombre de usuario es requerido y no debe ser strider</span
-            >
+            <span class="form-text text-danger">{{
+              getErrorField.getErrorEmail(myForm, 'username')
+            }}</span>
           }
         </div>
       </div>

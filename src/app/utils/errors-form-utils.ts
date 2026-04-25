@@ -23,6 +23,8 @@ export class getFieldError {
           return 'El correo NO es valido,verifica!!';
         case 'emailTaken':
           return 'El correo ya esta siendo usado por otro usuario';
+        case 'noStrider':
+          return 'El nombre de usuario no puede ser strider';
       }
     }
     return null;
@@ -42,6 +44,7 @@ export class getFieldError {
   }
 
   static getErrorGeneral(form: FormArray) {
+    console.log(form.errors);
     if (form.controls.length == 0) return null;
     const errors = form.errors || {};
 
@@ -69,6 +72,17 @@ export class getFieldError {
       };
     }
 
+    return null;
+  }
+
+  static noStrider(control: AbstractControl): ValidationErrors | null | string {
+    const value = control.value;
+    console.log(value);
+    if (value == 'strider') {
+      return {
+        noStrider: true,
+      };
+    }
     return null;
   }
 }
